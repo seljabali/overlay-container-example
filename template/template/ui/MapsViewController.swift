@@ -8,8 +8,6 @@ class MapsViewController: UIViewController {
     internal var mapView: MKMapView?
 
     private var showsOverlay = false
-    private let backgroundPassThrough = PassThroughView()
-    private let overlayBackground = PassThroughView()
     private let locationListViewController = LocationListBottomSheetViewController()
     private let overlayController = OverlayContainerViewController()
     private var overlayContainerView = PassThroughView()
