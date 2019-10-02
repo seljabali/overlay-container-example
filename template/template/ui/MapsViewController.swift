@@ -12,8 +12,7 @@ class MapsViewController: UIViewController {
     private let overlayBackground = PassThroughView()
     private let locationListViewController = LocationListBottomSheetViewController()
     private let overlayController = OverlayContainerViewController()
-    private var overlayContainerView = UIView()
-    private let backgroundView = UIView()
+    private var overlayContainerView = PassThroughView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,32 +29,14 @@ class MapsViewController: UIViewController {
     private func initializeViews() {
         mapView = MKMapView()
         self.view.insertSubview(mapView!, at: 0)
-
         overlayController.delegate = self
-
-        view.addSubview(backgroundPassThrough)
-
-        overlayBackground.addSubview(overlayContainerView)
-        backgroundPassThrough.addSubview(overlayBackground)
-
+        self.view.insertSubview(overlayContainerView, at: 1)
         setLocationsListBottomSheet()
     }
 
     private func setConstraints() {
-        backgroundPassThrough.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(view.snp.top)
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
-            make.bottom.equalTo(view.snp.bottom)
-        }
         mapView!.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(view.snp.top)
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
-            make.bottom.equalTo(view.snp.bottom)
-        }
-        overlayBackground.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(view.snp.centerY)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             make.bottom.equalTo(view.snp.bottom)
